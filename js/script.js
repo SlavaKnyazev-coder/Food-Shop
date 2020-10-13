@@ -88,4 +88,38 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     clockTime('.timer', deadline);
+
+    //Modal
+    const $modalTrigger = document.querySelectorAll('[data-modal]'),
+        $modal = document.querySelector('.modal'),
+        $modalCloseBtn = document.querySelector('[data-close]');
+
+    $modalTrigger.forEach(btn => {
+        btn.addEventListener('click', () => {
+            $modal.classList.remove('hide');
+            $modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        })
+    })
+
+    function closeModal(){
+        $modal.classList.remove('show');
+        $modal.classList.add('hide');
+        document.body.style.overflow = '';
+    }
+
+    $modalCloseBtn.addEventListener('click', closeModal);
+
+    $modal.addEventListener('click', event => {
+        if(event.target === $modal){
+            closeModal();
+        }
+    })
+
+    document.addEventListener('keydown', (event) => {
+        if(event.code === 'Escape'){
+            closeModal();
+        }
+    })
+
 })
